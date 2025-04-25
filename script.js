@@ -1,59 +1,99 @@
 const yesBtn = document.getElementById('yes-btn');
+
 const noBtn = document.getElementById('no-btn');
-const loveMessage = document.getElementById('love-message');
-const heartStructure = document.getElementById('heart-structure');
-const canvas = document.getElementById('doodle-canvas');
-const ctx = canvas.getContext('2d');
+
+const questionBox = document.getElementById('question-box');
+
+const lovePage = document.getElementById('love-page');
+
+const heartShape = document.getElementById('heart-shape');
+
+const floatingHearts = document.getElementById('floating-hearts');
+
 function moveNoButton(e) {
- const offsetX = Math.random() * 300 - 150;
- const offsetY = Math.random() * 300 - 150;
- noBtn.style.position = 'absolute';
- noBtn.style.left = `${e.clientX + offsetX}px`;
- noBtn.style.top = `${e.clientY + offsetY}px`;
+
+  const offsetX = Math.random() * 300 - 150;
+
+  const offsetY = Math.random() * 300 - 150;
+
+  noBtn.style.position = 'absolute';
+
+  noBtn.style.left = `${e.clientX + offsetX}px`;
+
+  noBtn.style.top = `${e.clientY + offsetY}px`;
+
 }
+
 noBtn.addEventListener('mouseover', moveNoButton);
+
 yesBtn.addEventListener('click', () => {
- document.getElementById('question-box').style.display = 'none';
- loveMessage.style.display = 'block';
- drawHeartStructure();
- canvas.style.display = 'block';
- drawDoodle();
+
+  questionBox.style.display = 'none';
+
+  lovePage.style.display = 'block';
+
+  buildHeartShape();
+
+  createFloatingHearts();
+
 });
-function drawHeartStructure() {
- let heartRow = '';
- for (let i = 1; i <= 9; i++) {
-   heartRow += '💕'.repeat(i) + '<br>';
- }
- for (let i = 8; i >= 1; i--) {
-   heartRow += '💕'.repeat(i) + '<br>';
- }
- heartStructure.innerHTML = heartRow;
+
+function buildHeartShape() {
+
+  const heartPattern = [
+
+    "  00   00  ",
+
+    " 0000 0000 ",
+
+    "00000000000",
+
+    "00000000000",
+
+    " 000000000 ",
+
+    "  0000000  ",
+
+    "   00000   ",
+
+    "    000    ",
+
+    "     0     "
+
+  ];
+
+  heartShape.innerHTML = '';
+
+  heartPattern.forEach(row => {
+
+    const line = row.replace(/0/g, '❤️').replace(/ /g, '&nbsp;');
+
+    heartShape.innerHTML += line + '<br>';
+
+  });
+
 }
-function drawDoodle() {
- canvas.width = window.innerWidth;
- canvas.height = window.innerHeight;
- ctx.font = '40px Comic Sans MS';
- ctx.fillStyle = 'black';
- ctx.fillText('(^_^)/ Pew! Pew!', 100, 100);
- drawFlyingHearts();
-}
-function drawFlyingHearts() {
- const firework = document.getElementById('fireworks');
- const hearts = ['💖','💘','💗','💓','💞','💝','💕'];
- setInterval(() => {
-   const h = document.createElement('span');
-   h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-   h.style.position = 'absolute';
-   h.style.left = `${Math.random() * window.innerWidth}px`;
-   h.style.top = `${Math.random() * window.innerHeight}px`;
-   h.style.fontSize = `${Math.random() * 20 + 20}px`;
-   h.style.opacity = 0.8;
-   h.style.transition = 'transform 4s ease-out, opacity 4s';
-   document.body.appendChild(h);
-   requestAnimationFrame(() => {
-     h.style.transform = `translateY(-200px)`;
-     h.style.opacity = 0;
-   });
-   setTimeout(() => h.remove(), 4000);
- }, 300);
-}
+
+function createFloatingHearts() {
+
+  setInterval(() => {
+
+    const heart = document.createElement('span');
+
+    heart.textContent = '💖';
+
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+
+    heart.style.top = window.innerHeight + 'px';
+
+    floatingHearts.appendChild(heart);
+
+    setTimeout(() => {
+
+      heart.remove();
+
+    }, 5000);
+
+  }, 300);
+
+} 
