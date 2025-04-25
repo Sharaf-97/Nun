@@ -1,0 +1,50 @@
+body {
+ margin: 0;
+ padding: 0;
+ font-family: 'Comic Sans MS', cursive;
+ text-align: center;
+ background-color: #fff0f5;
+}
+#question-box {
+ margin-top: 100px;
+}
+button {
+ font-size: 20px;
+ margin: 10px;
+ padding: 10px 20px;
+ cursor: pointer;
+}
+#love-message {
+ display: none;
+ margin-top: 50px;
+ animation: fadeIn 2s forwards;
+}
+#doodle {
+ font-size: 30px;
+ margin-bottom: 20px;
+}
+#heart-structure {
+ font-size: 30px;
+ color: hotpink;
+ line-height: 1;
+}
+h2 {
+ font-size: 40px;
+ color: red;
+ margin-top: 20px;
+}
+@keyframes fadeIn {
+ from { opacity: 0; }
+ to { opacity: 1; }
+}
+#fireworks {
+ margin-top: 30px;
+ font-size: 24px;
+ color: gold;
+}
+canvas {
+ position: absolute;
+ top: 0;
+ left: 0;
+ display: none;
+}
